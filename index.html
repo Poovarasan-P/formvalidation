@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image:linear-gradient(rgb(119, 185, 247),rgb(248, 238, 238));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-image:linear-gradient(rgb(119, 185, 247),rgb(248, 238, 238));
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 1px 2px 15px 20px rgba(251, 252, 251, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #666866;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #8f9490;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <span class="error" id="usernameError">Username is required</span>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <span class="error" id="emailError">Invalid email address</span>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <span class="error" id="passwordError">Password must be at least 6 characters</span>
+            
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword">
+            <span class="error" id="confirmPasswordError">Passwords do not match</span>
+            
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone">
+            <span class="error" id="phoneError">Phone number must be 10 digits</span>
+            
+            <button type="button" onclick="validateForm()">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            const username = document.getElementById('username');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const phone = document.getElementById('phone');
+
+            const usernameError = document.getElementById('usernameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            const phoneError = document.getElementById('phoneError');
+
+            usernameError.style.display = 'none';
+            emailError.style.display = 'none';
+            passwordError.style.display = 'none';
+            confirmPasswordError.style.display = 'none';
+            phoneError.style.display = 'none';
+
+         
+            if (username.value.trim() === '') {
+                isValid = false;
+                usernameError.style.display = 'block';
+            }
+
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email.value.trim())) {
+                isValid = false;
+                emailError.style.display = 'block';
+            }
+
+            
+            if (password.value.length < 6) {
+                isValid = false;
+                passwordError.style.display = 'block';
+            }
+
+         
+            if (password.value !== confirmPassword.value) {
+                isValid = false;
+                confirmPasswordError.style.display = 'block';
+            }
+
+            
+            const phonePattern = /^\d{10}$/;
+            if (!phonePattern.test(phone.value.trim())) {
+                isValid = false;
+                phoneError.style.display = 'block';
+            }
+
+            if (!isValid) {
+                alert('Please fix the errors in the form.');
+            } else {
+                alert('Form submitted successfully!');
+               
+            }
+        }
+    </script>
+</body>
+</html>
